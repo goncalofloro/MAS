@@ -1,0 +1,36 @@
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    background-image: url(Background.png),url(background2.png);
+    background-repeat:no-repeat,repeat;
+
+
+}
+
+#container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#coluna{
+    width: 80%;
+}
+#cards-gap{
+    column-gap: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+}
+.card {
+    display: flex;
+    flex-direction: column;
+}
+.card-body{
+    flex-grow: 1;
+}
