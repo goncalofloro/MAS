@@ -4,53 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
+    <style>       
     </style>
 </head>
 <body>
-    <form onsubmit="login()">
+    <form onsubmit="register()">
+        <label for="regUsername">Usuário:</label>
+        <input type="text" id="regUsername" name="regUsername" required>
+
+        <label for="regPassword">Senha:</label>
+        <input type="password" id="regPassword" name="regPassword" required>
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <hr>
+
+    <form onsubmit="login(event)">
         <label for="username">Usuário:</label>
         <input type="text" id="username" name="username" required>
 
@@ -61,12 +31,24 @@
     </form>
 
     <script>
-        function login() {
+        function register() {
+            var regUsername = document.getElementById('regUsername').value;
+            var regPassword = document.getElementById('regPassword').value;
+            if (localStorage.getItem(regUsername) !== null) {
+                alert('Usuário já registrado. Escolha outro nome de usuário.');
+                return false;
+            }
+            localStorage.setItem(regUsername, regPassword);
+            alert('Registro concluído com sucesso. Faça login para acessar o perfil.');
+            return false;
+        }
+
+        function login(event) {
+            event.preventDefault();
             var enteredUsername = document.getElementById('username').value;
             var enteredPassword = document.getElementById('password').value;
-            if (enteredUsername === 'usuario' && enteredPassword === 'senha') {
-                localStorage.setItem('username', enteredUsername);
-                localStorage.setItem('password', enteredPassword);
+            if (localStorage.getItem(enteredUsername) === enteredPassword) {
+                alert('Login bem-sucedido. Redirecionando para o perfil.');
                 window.location.href = 'perfil.html';
             } else {
                 alert('Credenciais inválidas. Tente novamente.');
