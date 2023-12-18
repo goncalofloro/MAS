@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register</h2>
+    <form onsubmit="register()">
+        <label for="regUsername">Username:</label>
+        <input type="text" id="regUsername" name="regUsername" required>
+
+        <label for="regPassword">Password:</label>
+        <input type="password" id="regPassword" name="regPassword" required>
+
+        <!-- New field for Email -->
+        <label for="regEmail">Email:</label>
+        <input type="email" id="regEmail" name="regEmail" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a href="login.html">Login here</a>.</p>
+
+    <script>
+        function register() {
+            var regUsername = document.getElementById('regUsername').value;
+            var regPassword = document.getElementById('regPassword').value;
+            var regEmail = document.getElementById('regEmail').value; // New field
+
+            if (localStorage.getItem(regUsername) !== null) {
+                alert('Username already registered. Choose another username.');
+                return false;
+            }
+
+            // Store user data as an object
+            var userData = {
+                password: regPassword,
+                email: regEmail, // New field
+            };
+
+            localStorage.setItem(regUsername, JSON.stringify(userData));
+
+            alert('Registration successful. Please login.');
+            window.location.href = 'login.html';
+            return false;
+        }
+    </script>
+</body>
+</html>

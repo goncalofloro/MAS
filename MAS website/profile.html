@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h2>User Profile</h2>
+    <p>Welcome to your profile, <span id="displayUsername"></span>!</p>
+    <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+    <p><a href="login.html">Logout</a></p>
+
+    <script>
+        var storedUsername = localStorage.getItem('username');
+
+        if (storedUsername) {
+            var storedUserData = localStorage.getItem(storedUsername);
+
+            if (storedUserData) {
+                var userData = JSON.parse(storedUserData);
+
+                document.getElementById('displayUsername').innerText = storedUsername;
+                document.getElementById('displayEmail').innerText = userData.email;
+            } else {
+                alert('User data not found.');
+            }
+        } else {
+            alert('User not authenticated. Please login.');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

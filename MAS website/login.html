@@ -3,55 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <style>       
-    </style>
+    <title>Login</title>
 </head>
 <body>
-    <form onsubmit="register()">
-        <label for="regUsername">Usuário:</label>
-        <input type="text" id="regUsername" name="regUsername" required>
-
-        <label for="regPassword">Senha:</label>
-        <input type="password" id="regPassword" name="regPassword" required>
-
-        <button type="submit">Registrar</button>
-    </form>
-
-    <hr>
-
+    <h2>Login</h2>
     <form onsubmit="login(event)">
-        <label for="username">Usuário:</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
-        <label for="password">Senha:</label>
+        <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
 
-        <button type="submit">Entrar</button>
+        <button type="submit">Login</button>
     </form>
 
-    <script>
-        function register() {
-            var regUsername = document.getElementById('regUsername').value;
-            var regPassword = document.getElementById('regPassword').value;
-            if (localStorage.getItem(regUsername) !== null) {
-                alert('Usuário já registrado. Escolha outro nome de usuário.');
-                return false;
-            }
-            localStorage.setItem(regUsername, regPassword);
-            alert('Registro concluído com sucesso. Faça login para acessar o perfil.');
-            return false;
-        }
+    <p>Don't have an account? <a href="register.html">Register here</a>.</p>
 
+    <script>
         function login(event) {
             event.preventDefault();
             var enteredUsername = document.getElementById('username').value;
             var enteredPassword = document.getElementById('password').value;
-            if (localStorage.getItem(enteredUsername) === enteredPassword) {
-                alert('Login bem-sucedido. Redirecionando para o perfil.');
-                window.location.href = 'perfil.html';
+
+            var storedUserData = localStorage.getItem(enteredUsername);
+
+            if (storedUserData) {
+                var userData = JSON.parse(storedUserData);
+
+                if (userData.password === enteredPassword) {
+                    alert('Login successful. Redirecting to the profile.');
+
+                    // Store the username in localStorage for future reference
+                    localStorage.setItem('username', enteredUsername);
+
+                    window.location.href = 'profile.html';
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
             } else {
-                alert('Credenciais inválidas. Tente novamente.');
+                alert('User not found. Register first.');
             }
 
             return false;
