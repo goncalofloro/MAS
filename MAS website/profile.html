@@ -3,13 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="Style.css">
     <title>User Profile</title>
 </head>
 <body>
+    <nav class="navbar navbar-dark fixed-top navbar-expand-md bg-tertiary" style="background-color: rgba(255, 255, 255, 0); box-shadow: none;">
+        <div class="container-fluid">
+            <a class="navbar-brand me-5 ms-4" href="index.html"><img src="Superpets-Logo.png" alt="Logo dos Superpets" width="70"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item me-4">
+                    <a class="nav-link active " aria-current="page" href="planos.html"><h2>Planos</h2></a>
+                </li>
+                <li class="nav-item me-4" >
+                    <a class="nav-link active" href="lojas.html"><h2>Lojas</h2></a>
+                </li>
+                <li class="nav-item me-4">
+                    <a class="nav-link active" href="clinicas.html"><h2>Clinicas</h2></a>
+                </li>
+                <li class="nav-item me-4">
+                    <a class="nav-link active" href="consultas.html"><h2>Consultas</h2></a>
+                </li>
+            </ul> 
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                     <a class="nav-link active" href="login.html"><h5>Login</h5></a> 
+                </li> 
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                     <a class="nav-link active" href="profile.html"><h1><i class="fa fa-user-circle-o" aria-hidden="true"></i></h1></a> 
+                </li> 
+            </ul>
+        </div>
+    </nav>
+
     <h2>User Profile</h2>
-    <p>Welcome to your profile, <span id="displayUsername"></span>!</p>
+    <p>Welcome to your profile, <span id="displayUsername"></span></p>
     <p><strong>Email:</strong> <span id="displayEmail"></span></p>
-    <p><a href="index.html">Menu</a></p>
 
     <script>
         var storedUsername = localStorage.getItem('username');
@@ -29,6 +68,10 @@
             alert('User not authenticated. Please login.');
             window.location.href = 'login.html';
         }
+        // Inicialize o ViewModel do perfil
+        var profileViewModel = new ProfileViewModel();
+        ko.applyBindings(profileViewModel, document.getElementById("perfilContainer"));
+
     </script>
 </body>
 </html>
