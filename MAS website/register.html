@@ -25,9 +25,11 @@
     </style>
 </head>
 <body>
-
     <div class="container mt-5 register-container">
-        <h2 class="text-center text-light">Register</h2>
+        <div class="text-center pb-4"><img src="Superpets-Logo.png" style="width: 300px;" alt="Superpets"></div>
+        <div class="text-center justify-content-center text-light rounded-5 d-flex justify-content-center align-items-center p-1" style="font-weight: bold;background-color: #19254b;">
+            <h2 class="m-0">Make an Account</h2>
+        </div>
         <form onsubmit="register()">
             <label for="regUsername">Username:</label>
             <input type="text" id="regUsername" name="regUsername" class="form-control" required>
@@ -39,11 +41,11 @@
             <label for="regEmail">Email:</label>
             <input  id="regEmail" name="regEmail" class="form-control" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}">
 
-            <button type="submit" class="btn btn-primary btn-block mt-3">Register</button>
+            <button type="submit" class="btn btn-block mt-3 text-light" style="background-color: #19254b;">Register</button>
         </form>
 
         <p id="register-feedback" class="text-center mt-3"></p>
-        <p class="text-center">Already have an account? <a class="text-light" href="login.html">Login here</a>.</p>
+        <p class="text-center text-light">Already have an account? <a class="text-light" href="login.html">Login here</a></p>
     </div>>
 
     <script>
