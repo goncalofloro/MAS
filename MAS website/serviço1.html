@@ -51,39 +51,39 @@
             </ul>
         </div>
     </nav>
-    
+    <br>
     <div class="container mt-5 pt-5">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card-img"><img src="https://www.animalvip.pt/wp-content/uploads/2018/05/3.png" style="height:300px" alt="Image 1"></div>
+            <div class="col-md-5">
+                <div class="card-img"><img src="https://www.purina.pt/sites/default/files/2022-04/Article%20teaser%20puppy%20walk.jpg" style="height:300px" alt="Passeio"></div>
             </div>
             <div class="col ms-0">
-                <p><h3>Hotel e Spa</h3></p>
-                <p><h3>localização: Aveiro</h3></p>
-                <p><h3>Disponível todos os dias do ano</h3></p>
-                <p><h3>Especialidade: Cães e gatos</h3></p>
+                <br>
+                <p><h3>Serviço: Passeio</h3></p>
+                <br>
+                <p><h3>Horário: 7:00-22:00,</h3></p>
+                <p><h3>todos os dias</h3></p>
             </div>
         </div>
         </br>
         <!-- Formulário para agendar uma nova consulta -->
-        <h3>Agendar Novo Hotel</h3>
-        <form data-bind="submit: agendarhoteis">
+        <h3>Agendar Novo Passeio</h3>
+        <form data-bind="submit: agendarpasseio">
             <div class="form-group">
                 <label for="animal">Nome do Animal:</label>
                 <input type="text" class="form-control" id="animal" data-bind="value: animal" required>
             </div>
 
             <div class="form-group">
-                <label for="data">Data da Entrada:</label>
+                <label for="data">Data do passeio:</label>
                 <input type="date" class="form-control" id="data" data-bind="value: data" required>
             </div>
-
             <div class="form-group">
-                <label for="hora">Horário de saída:</label>
-                <input type="date" class="form-control" id="data1" data-bind="value: data1" required>
+                <label for="hora">Horário do passeio:</label>
+                <input type="time" class="form-control" id="hora" data-bind="value: hora" required>
             </div>
             </br>
-            <button type="submit" class="btn btn-primary">Agendar Hotel</button>
+            <button type="submit" class="btn btn-primary">Agendar Passeio</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -92,34 +92,34 @@
     <script>
         $(document).ready(function () {
             // ViewModel com Knockout.js
-            function hoteisViewModel() {
+            function passeioViewModel() {
                 var self = this;
     
                 self.animal = ko.observable("");
                 self.data = ko.observable("");
-                self.data1 = ko.observable("");
+                self.hora = ko.observable("");
     
                 // Array para armazenar consultas agendadas
-                self.hoteisAgendados = ko.observableArray([]);
+                self.passeioAgendadas = ko.observableArray([]);
     
                 // Função para agendar consulta
-                self.agendarhoteis = function () {
-                    var hoteisInfo = "Hotel e Spa, Coimbra, animal: "+`${self.animal()}, ${self.data()}, ${self.data1()}`;
-                    self.hoteisAgendados.push(hoteisInfo);
+                self.agendarpasseio = function () {
+                    var passeioInfo = "Serviço: passeio, animal: "+`${self.animal()}, ${self.data()}, ${self.hora()}`;
+                    self.passeioAgendadas.push(passeioInfo);
     
                     // Armazenar na localStorage
-                    localStorage.setItem('hoteisAgendados', JSON.stringify(self.hoteisAgendados()));
+                    localStorage.setItem('passeioAgendadas', JSON.stringify(self.passeioAgendadas()));
     
                     self.animal("");
                     self.data("");
-                    self.data1("");
-                    window.location.href = 'marca.html';
+                    self.hora("");
+                    window.location.href = 'serviçomarca.html';
                 };
             }
     
             // Inicialize o ViewModel
-            var viewModel = new hoteisViewModel();
-            ko.applyBindings(viewModel, document.getElementById("hoteisForm"));
+            var viewModel = new passeioViewModel();
+            ko.applyBindings(viewModel, document.getElementById("passeioForm"));
         });
     </script>
 </body>

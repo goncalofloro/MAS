@@ -51,75 +51,63 @@
             </ul>
         </div>
     </nav>
-    
+    <br>
     <div class="container mt-5 pt-5">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card-img"><img src="https://www.animalvip.pt/wp-content/uploads/2018/05/3.png" style="height:300px" alt="Image 1"></div>
+            <div class="col-md-3">
+                <div class="card-img"><img style="height: 250px;" src="alimentacao.png" alt="alimentacao"  style="height:300px"></div>
             </div>
             <div class="col ms-0">
-                <p><h3>Hotel e Spa</h3></p>
-                <p><h3>localização: Aveiro</h3></p>
-                <p><h3>Disponível todos os dias do ano</h3></p>
-                <p><h3>Especialidade: Cães e gatos</h3></p>
+                <br>
+                <p><h3>Plano de Alimentação</h3></p>
+                <br>
+                <p><h3>Preço:</h3></p>
+                <p><h3>todos os dias</h3></p>
             </div>
         </div>
-        </br>
-        <!-- Formulário para agendar uma nova consulta -->
-        <h3>Agendar Novo Hotel</h3>
-        <form data-bind="submit: agendarhoteis">
-            <div class="form-group">
-                <label for="animal">Nome do Animal:</label>
-                <input type="text" class="form-control" id="animal" data-bind="value: animal" required>
-            </div>
-
-            <div class="form-group">
-                <label for="data">Data da Entrada:</label>
-                <input type="date" class="form-control" id="data" data-bind="value: data" required>
-            </div>
-
-            <div class="form-group">
-                <label for="hora">Horário de saída:</label>
-                <input type="date" class="form-control" id="data1" data-bind="value: data1" required>
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><h3>Tipo de pagamento:</h3></p>
+                </div>
+                <div class="col-md-2">
+                    <a class="navbar-brand"><img id="imagem1" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Logo_MBWay.svg/2560px-Logo_MBWay.svg.png" height="40" /></a>
+                </div>
+                <div class="col-md-4">
+                    <a class="navbar-brand"><img id="imagem2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/MasterCard_early_1990s_logo.svg/220px-MasterCard_early_1990s_logo.svg.png" height="40" /></a>
+                </div>
             </div>
             </br>
-            <button type="submit" class="btn btn-primary">Agendar Hotel</button>
-        </form>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group ">
+                        <label>Número de contribuinte:</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <br/><br/><br/>
+                    <a class="btn btn-secondary" data-bind="click: limparpasseio"><h2>Compra</h2></a>
+                </div>
+            </div>
+        </div>
+        
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function () {
-            // ViewModel com Knockout.js
-            function hoteisViewModel() {
-                var self = this;
-    
-                self.animal = ko.observable("");
-                self.data = ko.observable("");
-                self.data1 = ko.observable("");
-    
-                // Array para armazenar consultas agendadas
-                self.hoteisAgendados = ko.observableArray([]);
-    
-                // Função para agendar consulta
-                self.agendarhoteis = function () {
-                    var hoteisInfo = "Hotel e Spa, Coimbra, animal: "+`${self.animal()}, ${self.data()}, ${self.data1()}`;
-                    self.hoteisAgendados.push(hoteisInfo);
-    
-                    // Armazenar na localStorage
-                    localStorage.setItem('hoteisAgendados', JSON.stringify(self.hoteisAgendados()));
-    
-                    self.animal("");
-                    self.data("");
-                    self.data1("");
-                    window.location.href = 'marca.html';
-                };
-            }
-    
-            // Inicialize o ViewModel
-            var viewModel = new hoteisViewModel();
-            ko.applyBindings(viewModel, document.getElementById("hoteisForm"));
+        $(document).ready(function() {
+            $('img').click(function() {
+                // Desselecionar todas as imagens
+                $('img').removeClass('selecionada');
+                
+                // Selecionar a imagem clicada
+                $(this).addClass('selecionada');
+            });
         });
     </script>
 </body>
