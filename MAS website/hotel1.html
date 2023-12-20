@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="Style.css">
-    <title>Superpets- Clinicas</title>
+    <title>Superpets-Vet1</title>
 </head>
 <body>
     <nav class="navbar navbar-dark fixed-top navbar-expand-md bg-tertiary" style="background-color: rgba(255, 255, 255, 0); box-shadow: none;">
@@ -51,24 +51,76 @@
             </ul>
         </div>
     </nav>
-
-    <div class="container mt-5 p-5" id="example-grid">
-        <!-- First Row -->
-        <div class="row">
-            <div class="col-md-4 mt-4"><a href="hotel1.html"><img src="https://www.animalvip.pt/wp-content/uploads/2018/05/3.png" alt="Image 1"></a></div>
-            <div class="col-md-4 mt-4"><a href="#"><img src="https://www.petfun.pt/client/files/0000000001/1231.jpg" alt="Image 2"></a></div>
-            <div class="col-md-4 mt-4"><a href="#"><img src="https://www.vetsobrerodas.pt/uploads/subconteudos_galeria/hotel-para-caes.jpg" alt="Image 3"></a></div>
-        </div>
     
-        <!-- Second Row -->
+    <div class="container mt-5 pt-5">
         <div class="row">
-            <div class="col-md-4 mt-4"><a href="#"><img src="https://www.villadog.pt/globalAdmin/fotos/gallery/galeriaprincipal/2020-07-08/19_30_41/foto2_grande.jpg" alt="Image 4"></a></div>
-            <div class="col-md-4 mt-4"><a href="#"><img src="https://www.hotel-montes-burgos.com/images/2020/02/04/show7.jpg" alt="Image 5"></a></div>
-            <div class="col-md-4 mt-4"><a href="#"><img src="https://i.ytimg.com/vi/4xaUHV7CWlo/maxresdefault.jpg" alt="Image 6"></a></div>
+            <div class="col-md-4">
+                <div class="card-img"><img src="https://www.animalvip.pt/wp-content/uploads/2018/05/3.png" style="height:300px" alt="Image 1"></div>
+            </div>
+            <div class="col ms-0">
+                <p><h3>Hotel e Spa</h3></p>
+                <p><h3>localização: Aveiro</h3></p>
+                <p><h3>Disponível todos os dias do ano</h3></p>
+                <p><h3>Especialidade: Cães e gatos</h3></p>
+            </div>
         </div>
+        </br>
+        <!-- Formulário para agendar uma nova consulta -->
+        <h3>Agendar Nova Consulta</h3>
+        <form data-bind="submit: agendarhoteis">
+            <div class="form-group">
+                <label for="animal">Nome do Animal:</label>
+                <input type="text" class="form-control" id="animal" data-bind="value: animal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="data">Data da Entrada:</label>
+                <input type="date" class="form-control" id="data" data-bind="value: data" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hora">Horário de saída:</label>
+                <input type="date" class="form-control" id="data1" data-bind="value: data1" required>
+            </div>
+            </br>
+            <button type="submit" class="btn btn-primary">Agendar Consulta</button>
+        </form>
     </div>
-    
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // ViewModel com Knockout.js
+            function hoteisViewModel() {
+                var self = this;
+    
+                self.animal = ko.observable("");
+                self.data = ko.observable("");
+                self.data1 = ko.observable("");
+    
+                // Array para armazenar consultas agendadas
+                self.hoteisAgendados = ko.observableArray([]);
+    
+                // Função para agendar consulta
+                self.agendarhoteis = function () {
+                    var hoteisInfo = "Hotel e Spa, Coimbra, animal: "+`${self.animal()}, ${self.data()}, ${self.data1()}`;
+                    self.hoteisAgendados.push(hoteisInfo);
+    
+                    // Armazenar na localStorage
+                    localStorage.setItem('hoteisAgendados', JSON.stringify(self.hoteisAgendados()));
+    
+                    self.animal("");
+                    self.data("");
+                    self.data1("");
+                    window.location.href = 'marca.html';
+                };
+            }
+    
+            // Inicialize o ViewModel
+            var viewModel = new hoteisViewModel();
+            ko.applyBindings(viewModel, document.getElementById("hoteisForm"));
+        });
+    </script>
 </body>
 </html>
