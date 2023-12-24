@@ -31,16 +31,27 @@
             <h2 class="m-0">Make an Account</h2>
         </div>
         <form onsubmit="register()">
-            <label for="regUsername">Username:</label>
-            <input type="text" id="regUsername" name="regUsername" class="form-control" required>
-
-            <label for="regPassword">Password:</label>
-            <input type="password" id="regPassword" name="regPassword" class="form-control" required>
-
-            <!-- New field for Email -->
-            <label for="regEmail">Email:</label>
-            <input  id="regEmail" name="regEmail" class="form-control" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}">
-
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="regUsername">Username:</label>
+                    <input type="text" id="regUsername" name="regUsername" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="regPassword">Password:</label>
+                    <input type="password" id="regPassword" name="regPassword" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="regEmail">Email:</label>
+                    <input  id="regEmail" name="regEmail" class="form-control" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}">
+                </div>
+                <div class="col-md-6">
+                   <label for="regAnimal" class="text-light">Espécie do animal:</label>
+                    <input  id="regAnimal" name="regAnimal" class="form-control" required> 
+                </div>
+            </div>
             <button type="submit" class="btn btn-block mt-3 text-light" style="background-color: #19254b;">Register</button>
         </form>
 
@@ -52,7 +63,9 @@
         function register() {
             var regUsername = document.getElementById('regUsername').value;
             var regPassword = document.getElementById('regPassword').value;
-            var regEmail = document.getElementById('regEmail').value; // New field
+            var regEmail = document.getElementById('regEmail').value;
+            var regAnimal = document.getElementById('regAnimal').value;
+
 
             if (localStorage.getItem(regUsername) !== null) {
                 alert('Username already registered. Choose another username.');
@@ -62,7 +75,8 @@
             // Store user data as an object
             var userData = {
                 password: regPassword,
-                email: regEmail, // New field
+                email: regEmail, 
+                animal:regAnimal,
             };
 
             localStorage.setItem(regUsername, JSON.stringify(userData));

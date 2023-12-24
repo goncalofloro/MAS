@@ -58,6 +58,7 @@
                 <p class="h5">Welcome to your profile, <span id="displayUsername"></span></p>
                 <br>
                 <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+                <p><strong>Animal:</strong> <span id="displayAnimal"></span></p>
             </div>
     </div>
     
@@ -73,6 +74,7 @@
 
                 document.getElementById('displayUsername').innerText = storedUsername;
                 document.getElementById('displayEmail').innerText = userData.email;
+                document.getElementById('displayAnimal').innerText = userData.animal;
             } else {
                 alert('User data not found.');
             }
