@@ -48,8 +48,18 @@
                     <input  id="regEmail" name="regEmail" class="form-control" required pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}">
                 </div>
                 <div class="col-md-6">
-                   <label for="regAnimal" class="text-light">Espécie do animal:</label>
-                    <input  id="regAnimal" name="regAnimal" class="form-control" required> 
+                   <label for="regEspAnimal" class="text-light">Espécie do animal:</label>
+                    <input  id="regEspAnimal" name="regEspAnimal" class="form-control" required> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="regNameAnimal">Nome do animal:</label>
+                    <input  id="regNameAnimal" name="regNameAnimal" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                   <label for="regRacaAnimal" class="text-light">Raça do animal:</label>
+                    <input  id="regRacaAnimal" name="regRacaAnimal" class="form-control" required>
                 </div>
             </div>
             <button type="submit" class="btn btn-block mt-3 text-light" style="background-color: #19254b;">Register</button>
@@ -64,8 +74,9 @@
             var regUsername = document.getElementById('regUsername').value;
             var regPassword = document.getElementById('regPassword').value;
             var regEmail = document.getElementById('regEmail').value;
-            var regAnimal = document.getElementById('regAnimal').value;
-
+            var regNameAnimal = document.getElementById('regNameAnimal').value;
+            var regEspAnimal = document.getElementById('regEspAnimal').value;
+            var regRacaAnimal = document.getElementById('regRacaAnimal').value;
 
             if (localStorage.getItem(regUsername) !== null) {
                 alert('Username already registered. Choose another username.');
@@ -74,9 +85,12 @@
 
             // Store user data as an object
             var userData = {
+                username: regUsername,
                 password: regPassword,
-                email: regEmail, 
-                animal:regAnimal,
+                email: regEmail,
+                especie: regEspAnimal,
+                animal: regNameAnimal,
+                raca: regRacaAnimal,
             };
 
             localStorage.setItem(regUsername, JSON.stringify(userData));

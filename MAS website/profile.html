@@ -55,14 +55,16 @@
     <div class="container mt-4 mb-5 ">
         <div class="row-cols-2">
             <div class="card rounded-3">
-                <div class="card-header h1 text-center" style="font-weight: bolder;"> Nome do cao####</div>
+                <div class="card-header h1 text-center" style="font-weight: bolder;">Nome do cao</div>
+                <input type="file" id="imageInput" accept="image/*">
                 <img class="card-img-top rounded-0" src="https://images.trustinnews.pt/uploads/sites/5/2019/10/tribunais-vao-tratar-animais-de-estimacao-cada-vez-mais-como-criancas-2-1024x687.jpeg">
                 <div class="card-body">
-                    <div class="row h5 " style="font-weight:bolder;">
-                        <span class="col-12">Raça:</span>
-                        <span class="col-12">Peso:</span>
-                        <span class="col-12">Idade:</span>
-                        <span class="col-12">Peso:</span>
+                    <div class="row h5 " style="font-weight:bolder;"> 
+                        <span id="displayOwnerEmail">Email do Dono:</span>
+                        <span id="displayOwnerName">Nome do Dono:</span>
+                        <span id="displaySpecies">Espécie:</span>
+                        <span id="displayBreed">Raça:</span>
+                        <textarea id="animalInfo" class="form-control mt-3" rows="5" placeholder="Digite informações adicionais sobre o seu animal"></textarea>
                     </div>
                 </div>    
             </div>
@@ -71,16 +73,27 @@
 
     <script>
         var storedUsername = localStorage.getItem('username');
-
+    
         if (storedUsername) {
             var storedUserData = localStorage.getItem(storedUsername);
-
+    
             if (storedUserData) {
                 var userData = JSON.parse(storedUserData);
-
-                document.getElementById('displayUsername').innerText = storedUsername;
-                document.getElementById('displayEmail').innerText = userData.email;
-                document.getElementById('displayAnimal').innerText = userData.animal;
+    
+                // Update card header with user's name
+                document.querySelector('.card-header').innerText = userData.animal;
+    
+                // Update card body with user's email and animal species
+                document.querySelector('.card-body #displayOwnerEmail').innerText = 'Email do Dono: ' + userData.email;
+                document.querySelector('.card-body #displayOwnerName').innerText = 'Nome do Dono: ' + userData.username;
+                document.querySelector('.card-body #displaySpecies').innerText = 'Espécie: ' + userData.especie;
+                document.querySelector('.card-body #displayBreed').innerText = 'Raça: ' + userData.raca;
+    
+                // Set the image source from local storage
+                document.querySelector('.card-img-top').src = userData.image || "https://images.trustinnews.pt/uploads/sites/5/2019/10/tribunais-vao-tratar-animais-de-estimacao-cada-vez-mais-como-criancas-2-1024x687.jpeg";
+    
+                // Set the text area content
+                document.getElementById('animalInfo').value = userData.info || '';
             } else {
                 alert('User data not found.');
             }
@@ -88,10 +101,38 @@
             alert('User not authenticated. Please login.');
             window.location.href = 'login.html';
         }
-        // Inicialize o ViewModel do perfil
-        var profileViewModel = new ProfileViewModel();
-        ko.applyBindings(profileViewModel, document.getElementById("perfilContainer"));
-
+    
+        // Event listener for the file input change
+        var imageInput = document.getElementById('imageInput');
+        imageInput.addEventListener('change', function () {
+            var file = imageInput.files[0];
+            var reader = new FileReader();
+    
+            reader.onloadend = function () {
+                // Set the image source to the selected file
+                document.querySelector('.card-img-top').src = reader.result;
+    
+                // Save the image source to local storage
+                var storedUserData = localStorage.getItem(storedUsername);
+                var userData = JSON.parse(storedUserData) || {};
+                userData.image = reader.result;
+                localStorage.setItem(storedUsername, JSON.stringify(userData));
+            };
+    
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    
+        // Event listener for the text area change
+        var animalInfo = document.getElementById('animalInfo');
+        animalInfo.addEventListener('input', function () {
+            // Save the text area content to local storage
+            var storedUserData = localStorage.getItem(storedUsername);
+            var userData = JSON.parse(storedUserData) || {};
+            userData.info = animalInfo.value;
+            localStorage.setItem(storedUsername, JSON.stringify(userData));
+        });
     </script>
 </body>
 </html>
