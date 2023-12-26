@@ -1,13 +1,14 @@
 html{
     height: 100%;
+    margin-bottom: 5%;
 }
 
 body{
     height: 100%;
-    background-image: url(Background.png),url(background2.png);
-    background-repeat:no-repeat,repeat;
-
-
+    background-image: url(Background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 #container{
