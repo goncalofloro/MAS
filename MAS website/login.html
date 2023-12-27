@@ -54,8 +54,6 @@
                 var userData = JSON.parse(storedUserData);
 
                 if (userData.password === enteredPassword) {
-                    alert('Login successful. Redirecting to the profile.');
-
                     // Store the username in localStorage for future reference
                     localStorage.setItem('username', enteredUsername);
 
